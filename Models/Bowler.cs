@@ -10,7 +10,7 @@ namespace Mission13.Models
     public class Bowler
     {
         [Key]
-        [Range(33,100, ErrorMessage ="Please enter a number between 33 and 100")]
+        
         [Required]
         public int BowlerID { get; set; }
 
