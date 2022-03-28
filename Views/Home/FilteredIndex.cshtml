@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Bowler>
+
+<div class="text-center">
+    <h1 class="display-4">Mission 13</h1>
+    <h3>Made by Mitch Buhler</h3>
+    <br />
+
+    <p>Create a new user in the link below</p>
+    <a asp-controller="home" asp-action="CreateBowler" class="btn btn-info">Create New Bowler</a>
+    <br />
+    <br />
+
+    @foreach (Team t in ViewBag.Teams)
+    {
+        if (t.TeamID == ViewBag.TeamNumber)
+        {
+            <h3>@t.TeamName</h3>
+        }
+
+    }
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-2">
+                <h4>Filter by Team</h4>
+
+                <ul class="list-unstyled">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @foreach (Team t in ViewBag.Teams)
+                    {
+
+                        if (t.TeamID == ViewBag.TeamNumber)
+                        {
+                            <li><a asp-controller="home" asp-action="FilteredIndex" asp-route-TeamIDNumber="@t.TeamID"><mark>@t.TeamName</mark></a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="home" asp-action="FilteredIndex" asp-route-TeamIDNumber="@t.TeamID">@t.TeamName</a></li>
+                        }
+                    }
+                </ul>
+
+            </div>
+            <div class="col-10">
+
+
+                <table class="table table-bordered">
+                    <tr>
+
+                        <td>First Name</td>
+                        <td>Middle Init</td>
+                        <td>Last Name</td>
+                        <td>Address</td>
+                        <td>City</td>
+                        <td>State</td>
+                        <td>Zip</td>
+                        <td>Phone Number</td>
+
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+
+                    @foreach (var x in Model)
+                    {
+                        if (x.TeamID == ViewBag.TeamNumber)
+                        {
+                            <tr>
+
+                                <td>@x.BowlerFirstName</td>
+                                <td>@x.BowlerMiddleInit</td>
+                                <td>@x.BowlerLastName</td>
+                                <td>@x.BowlerAddress</td>
+                                <td>@x.BowlerCity</td>
+                                <td>@x.BowlerState</td>
+                                <td>@x.BowlerZip</td>
+                                <td>@x.BowlerPhoneNumber</td>
+
+
+                                <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-idNumber="@x.BowlerID">Edit</a></td>
+                                <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-idNumber="@x.BowlerID">Delete</a></td>
+                            </tr>
+                        }
+                    }
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
